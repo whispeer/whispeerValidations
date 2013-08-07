@@ -131,7 +131,7 @@
 				modules.push(require(load[i]));
 			}
 
-			cb(modules);
+			cb.apply(null, modules);
 
 			module.exports = exported;
 		} else if (typeof define !== "undefined") {
