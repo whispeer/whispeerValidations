@@ -44,6 +44,8 @@
 				"hex": true
 			};
 		}
+
+		return result;
 	}
 
 	function doValidate(ref, data) {
