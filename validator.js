@@ -1,6 +1,6 @@
 (function () {
 	"use strict";
-	var amanda, jsonSchemaValidator;
+	var amanda, h, jsonSchemaValidator;
 
 	var validations = {};
 	var encrValidations = {};
@@ -29,38 +29,6 @@
 		}
 
 		return result;
-	}
-
-	function amandaLoaded(am) {
-		amanda = am;
-
-
-		/**
-		 * EvenAttribute
-		 *
-		 * @param {string} property
-		 * @param {any} propertyValue
-		 * @param {any} attributeValue
-		 * @param {object} propertyAttributes
-		 * @param {function} callback
-		 */
-		var hexAttribute = function(property, propertyValue, attributeValue, propertyAttributes, callback) {
-
-			// If ‘even: true’
-			if (attributeValue) {
-				if (!h.isHex(propertyValue)) {
-					this.addError();
-				}
-			}
-
-			// Continue...
-			return callback();
-
-		};
-
-		// Add a new validator
-		jsonSchemaValidator = amanda("json");
-		jsonSchemaValidator.addAttribute("hex", hexAttribute);
 	}
 
 	function doValidate(ref, data) {
@@ -107,6 +75,40 @@
 		}
 	};
 
+	function amandaLoaded(am, helper, profileV) {
+		amanda = am;
+		h = helper;
+
+		validator.register("profile", profileV);
+
+		/**
+		 * EvenAttribute
+		 *
+		 * @param {string} property
+		 * @param {any} propertyValue
+		 * @param {any} attributeValue
+		 * @param {object} propertyAttributes
+		 * @param {function} callback
+		 */
+		var hexAttribute = function(property, propertyValue, attributeValue, propertyAttributes, callback) {
+
+			// If ‘even: true’
+			if (attributeValue) {
+				if (!h.isHex(propertyValue)) {
+					this.addError();
+				}
+			}
+
+			// Continue...
+			return callback();
+
+		};
+
+		// Add a new validator
+		jsonSchemaValidator = amanda("json");
+		jsonSchemaValidator.addAttribute("hex", hexAttribute);
+	}
+
 	function doLoad(cb, exported, load) {
 		if (typeof module !== "undefined" && module.exports && typeof require !== "undefined") {
 			var modules = [], i;
@@ -118,14 +120,14 @@
 
 			module.exports = exported;
 		} else if (typeof define !== "undefined") {
-			define(load, function(am) {
-				cb(am);
+			define(load, function() {
+				cb.apply(null, arguments);
 
 				return exported;
 			});
 		}
 	}
 
-	doLoad(amandaLoaded, validator, ["amanda"]);
+	doLoad(amandaLoaded, validator, ["amanda", "helper", "./validations/profileV"]);
 })();
 
