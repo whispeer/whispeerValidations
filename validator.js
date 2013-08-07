@@ -5,7 +5,7 @@
 	var validations = {};
 	var encrValidations = {};
 
-	function makeEncryptedValidator(data) {
+	function internalMakeEncrypedValidator(data) {
 		var result = {};
 		if (data.type) {
 			result.type = data.type;
@@ -29,6 +29,21 @@
 		}
 
 		return result;
+	}
+
+	function makeEncryptedValidator(data) {
+		var result = internalMakeEncrypedValidator(data);
+		if (result.properties) {
+			result.properties.iv = {
+				"type": "string",
+				"hex": true
+			};
+
+			result.properties.signature = {
+				"type": "string",
+				"hex": true
+			};
+		}
 	}
 
 	function doValidate(ref, data) {
@@ -128,6 +143,6 @@
 		}
 	}
 
-	doLoad(amandaLoaded, validator, ["amanda", "helper", "./validations/profileV"]);
+	doLoad(amandaLoaded, validator, ["amanda", "whispeerHelper", "./validations/profileV"]);
 })();
 
