@@ -92,11 +92,13 @@
 		}
 	};
 
-	function amandaLoaded(am, helper, profileV) {
+	function amandaLoaded(am, helper, profileV, messageV, topicV) {
 		amanda = am;
 		h = helper;
 
 		validator.register("profile", profileV);
+		validator.register("message", messageV);
+		validator.register("topic", topicV);
 
 		/**
 		 * EvenAttribute
@@ -145,6 +147,6 @@
 		}
 	}
 
-	doLoad(amandaLoaded, validator, ["amanda", "whispeerHelper", "./validations/profileV"]);
+	doLoad(amandaLoaded, validator, ["amanda", "whispeerHelper", "./validations/profileV", "./validations/messageV", "./validations/topicV"]);
 })();
 
