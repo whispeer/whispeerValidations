@@ -1,38 +1,10 @@
 "use strict";
 
-function makeEncryptedValidator(data) {
-	var result = {};
-	if (data.type) {
-		result.type = data.type;
-		result.required = data.required;
-
-		if (data.type === "string") {
-			result.hex = true;
-		} else if (data.type === "object") {
-			result.additionalProperties = data.additionalProperties;
-			result.properties = makeEncryptedValidator(data.properties);
-		} else if (data.type === "Array") {
-			result.items = makeEncryptedValidator(data.items);
-		}
-	} else {
-		var attr;
-		for (attr in data) {
-			if (data.hasOwnProperty(attr)) {
-				result[attr] = makeEncryptedValidator(data[attr]);
-			}
-		}
-	}
-
-	return result;
-}
-
 var profileJSON = {
 	"type": "object",
-	"additionalProperties": false,
 	"properties": {
 		"basic": {
 			"type": "object",
-			"additionalProperties": false,
 			"properties": {
 				"firstname": {
 					"type": "string",
@@ -49,7 +21,6 @@ var profileJSON = {
 
 		"location": {
 			"type": "object",
-			"additionalProperties": false,
 			"properties": {
 				"road": {
 					"type": "string"
@@ -71,13 +42,11 @@ var profileJSON = {
 
 		"contact": {
 			"type": "object",
-			"additionalProperties": false,
 			"properties": {
 				"im": {
 					"type": "Array",
 					"items": {
 						"type": "object",
-						"additionalProperties": false,
 						"properties": {
 							"messenger": {
 								"required": true,
@@ -101,7 +70,6 @@ var profileJSON = {
 					"type": "Array",
 					"items": {
 						"type": "object",
-						"additionalProperties": false,
 						"properties": {
 							"where": {
 								"type": "string"
@@ -118,7 +86,6 @@ var profileJSON = {
 					"type": "Array",
 					"items": {
 						"type": "object",
-						"additionalProperties": false,
 						"properties": {
 							"where": {
 								"type": "string"
@@ -143,11 +110,9 @@ var profileJSON = {
 
 		"relationship": {
 			"type": "object",
-			"additionalProperties": false,
 			"properties": {
 				"partner": {
 					"type": "object",
-					"additionalProperties": false,
 					"properties": {
 						"user": {
 							"type": "integer",
@@ -175,7 +140,6 @@ var profileJSON = {
 			"type": "array",
 			"items": {
 				"type": "object",
-				"additionalProperties": false,
 				"properties": {
 					"user": {
 						"type": "integer"
@@ -232,7 +196,6 @@ var profileJSON = {
 
 		"extended": {
 			"type": "object",
-			"additionalProperties": false,
 			"properties": {
 				"sex": {
 					"type": "string",
@@ -254,13 +217,11 @@ var profileJSON = {
 
 		"knowledge": {
 			"type": "object",
-			"additionalProperties": false,
 			"properties": {
 				"education": {
 					"type": "array",
 					"items": {
 						"type": "object",
-						"additionalProperties": false,
 						"properties": {
 							"name": {
 								"type": "string"
@@ -280,7 +241,6 @@ var profileJSON = {
 								"type": "Array",
 								"items": {
 									"type": "object",
-									"additionalProperties": false,
 									"properties": {
 										"name": {
 											"required": true,
@@ -312,7 +272,6 @@ var profileJSON = {
 			"type": "array",
 			"items": {
 				"type": "object",
-				"additionalProperties": false,
 				"properties": {
 					"title": {
 						"type": "string"
