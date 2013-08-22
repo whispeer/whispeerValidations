@@ -19,6 +19,11 @@ var profileJSON = {
 			}
 		},
 
+		"image": {
+			"type": "string",
+			"pattern": /^data:image\/\w+;base64,[A-Za-z0-9+\/=]*$/
+		},
+
 		"location": {
 			"type": "object",
 			"properties": {
@@ -118,16 +123,16 @@ var profileJSON = {
 							"type": "integer",
 							"minimum": 1
 						},
-						"since": {
-							"type": "string",
-							"format": "date",
-							"after": "1900-01-01"
-						},
 						"partnerSignature": {
 							"type": "string",
 							"hex": true
 						}
 					}
+				},
+				"since": {
+					"type": "string",
+					"format": "date",
+					"after": "1900-01-01"
 				},
 				"status": {
 					"type": "string",
