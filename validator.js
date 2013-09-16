@@ -92,13 +92,14 @@
 		}
 	};
 
-	function amandaLoaded(am, helper, profileV, messageV, topicV) {
+	function amandaLoaded(am, helper, profileV, messageV, topicV, circleV) {
 		amanda = am;
 		h = helper;
 
 		validator.register("profile", profileV);
 		validator.register("message", messageV);
 		validator.register("topic", topicV);
+		validator.register("circle", circleV);
 
 		/**
 		 * EvenAttribute
@@ -147,6 +148,6 @@
 		}
 	}
 
-	doLoad(amandaLoaded, validator, ["amanda", "whispeerHelper", "./validations/profileV", "./validations/messageV", "./validations/topicV"]);
+	doLoad(amandaLoaded, validator, ["amanda", "whispeerHelper", "./validations/profileV", "./validations/messageV", "./validations/topicV", , "./validations/circleV"]);
 })();
 
