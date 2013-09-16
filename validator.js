@@ -148,6 +148,6 @@
 		}
 	}
 
-	doLoad(amandaLoaded, validator, ["amanda", "whispeerHelper", "./validations/profileV", "./validations/messageV", "./validations/topicV", , "./validations/circleV"]);
+	doLoad(amandaLoaded, validator, ["amanda", "whispeerHelper", "./validations/profileV", "./validations/messageV", "./validations/topicV", "./validations/circleV"]);
 })();
 
