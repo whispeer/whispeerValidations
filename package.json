@@ -1,6 +1,6 @@
 {
   "name": "whispeerValidations",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Whispeer Validations Library",
   "engine": [
     "node >=0.6.0"
