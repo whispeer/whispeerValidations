@@ -140,6 +140,7 @@
 
 			module.exports = exported;
 		} else if (typeof define !== "undefined") {
+			console.log(JSON.stringify(load));
 			define(load, function() {
 				cb.apply(null, arguments);
 
