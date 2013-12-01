@@ -5,48 +5,76 @@
 	var validations = {};
 	var encrValidations = {};
 
-	function internalMakeEncrypedValidator(data) {
+	var encryptedProperties = {
+		type: "object",
+		additionalProperties: false,
+		properties: {
+			iv: {
+				"type": "string",
+				"hex": true
+			},
+			ct: {
+				"type": "string",
+				"hex": true
+			}
+		}
+	};
+
+	var EncryptedValidation = function (data, depth) {
+		this._data = data;
+		this._depth = depth;
+	};
+
+	EncryptedValidation._makeValidatorForPropertyObject = function () {
+		var result = {}, attr;
+
+		for (attr in this._data) {
+			if (this._data.hasOwnProperty(attr)) {
+				result[attr] = new EncryptedValidation(this._data[attr], this._depth - 1).make();
+			}
+		}
+
+		return result;
+	};
+
+	EncryptedValidation.prototype._makeValidatorDependingOnTypes = function () {
 		var result = {};
-		if (data.type) {
-			result.type = data.type;
-			result.required = data.required;
 
-			if (data.type === "string") {
-				result.hex = true;
-			} else if (data.type === "object") {
-				result.additionalProperties = data.additionalProperties;
-				result.properties = makeEncryptedValidator(data.properties);
-			} else if (data.type === "Array") {
-				result.items = makeEncryptedValidator(data.items);
-			}
+		result.type = this._data.type;
+		result.required = this._data.required;
+		result.additionalProperties = this._data.additionalProperties;
+
+		if (this._data.type === "string") {
+			result = encryptedProperties;
+		} else if (this._data.type === "object") {
+			result.properties = new EncryptedValidation(this._data.properties, this._depth).make();
+		} else if (this._data.type === "Array") {
+			//TODO (encryptObject is not ready for arrays yet)!
+			//result.items = makeEncryptedValidator(this._data.items);
+			throw "Array not implemented";
+		}
+
+		return result;
+	};
+
+	EncryptedValidation.prototype._makeEncryptedValidator = function () {
+		if (this._data.type) {
+			return this._makeValidatorDependingOnTypes();
+		}
+
+		return this._makeValidatorForPropertyObject();
+	};
+
+	EncryptedValidation.prototype.make = function () {
+		var result = {};
+		if (this._depth > 0) {
+			result = this._makeEncryptedValidator();
 		} else {
-			var attr;
-			for (attr in data) {
-				if (data.hasOwnProperty(attr)) {
-					result[attr] = makeEncryptedValidator(data[attr]);
-				}
-			}
+			result = encryptedProperties;
 		}
 
 		return result;
-	}
-
-	function makeEncryptedValidator(data) {
-		var result = internalMakeEncrypedValidator(data);
-		if (result.properties) {
-			result.properties.iv = {
-				"type": "string",
-				"hex": true
-			};
-
-			result.properties.signature = {
-				"type": "string",
-				"hex": true
-			};
-		}
-
-		return result;
-	}
+	};
 
 	function doValidate(ref, data) {
 		if (ref) {
@@ -79,10 +107,10 @@
 				throw "unregistered validation: " + name;
 			}
 		},
-		validateEncrypted: function (name, data) {
+		validateEncrypted: function (name, data, depth) {
 			if (!encrValidations[name]) {
 				if (validations[name]) {
-					encrValidations[name] = makeEncryptedValidator(validations[name]);
+					encrValidations[name] = new EncryptedValidation(validations[name], depth).make();
 				} else {
 					throw "unregistered validation: " + name;
 				}
