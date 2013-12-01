@@ -25,7 +25,7 @@
 		this._depth = depth;
 	};
 
-	EncryptedValidation._makeValidatorForPropertyObject = function () {
+	EncryptedValidation.prototype._makeValidatorForPropertyObject = function () {
 		var result = {}, attr;
 
 		for (attr in this._data) {
