@@ -3,50 +3,6 @@
 	var amanda, h, jsonSchemaValidator;
 
 	var validations = {};
-	var encrValidations = {};
-
-	function internalMakeEncrypedValidator(data) {
-		var result = {};
-		if (data.type) {
-			result.type = data.type;
-			result.required = data.required;
-
-			if (data.type === "string") {
-				result.hex = true;
-			} else if (data.type === "object") {
-				result.additionalProperties = data.additionalProperties;
-				result.properties = makeEncryptedValidator(data.properties);
-			} else if (data.type === "Array") {
-				result.items = makeEncryptedValidator(data.items);
-			}
-		} else {
-			var attr;
-			for (attr in data) {
-				if (data.hasOwnProperty(attr)) {
-					result[attr] = makeEncryptedValidator(data[attr]);
-				}
-			}
-		}
-
-		return result;
-	}
-
-	function makeEncryptedValidator(data) {
-		var result = internalMakeEncrypedValidator(data);
-		if (result.properties) {
-			result.properties.iv = {
-				"type": "string",
-				"hex": true
-			};
-
-			result.properties.signature = {
-				"type": "string",
-				"hex": true
-			};
-		}
-
-		return result;
-	}
 
 	function doValidate(ref, data) {
 		if (ref) {
@@ -83,17 +39,6 @@
 			} else {
 				throw "unregistered validation: " + name;
 			}
-		},
-		validateEncrypted: function (name, data, depth) {
-			if (!encrValidations[name]) {
-				if (validations[name]) {
-					encrValidations[name] = makeEncryptedValidator(validations[name]);
-				} else {
-					throw "unregistered validation: " + name;
-				}
-			}
-
-			return doValidate(encrValidations[name], data);
 		}
 	};
 
@@ -154,6 +99,15 @@
 		}
 	}
 
-	doLoad(amandaLoaded, validator, ["amanda", "whispeerHelper", "./validations/profileV", "./validations/messageV", "./validations/topicV", "./validations/circleV"]);
+	doLoad(amandaLoaded, validator,
+		[
+			"amanda",
+			"whispeerHelper",
+			"./validations/profileV",
+			"./validations/profileEncryptedV",
+			"./validations/postV",
+			"./validations/messageV",
+			"./validations/topicV",
+			"./validations/circleV"
+		]);
 })();
-
