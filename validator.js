@@ -42,11 +42,13 @@
 		}
 	};
 
-	function amandaLoaded(am, helper, profileV, messageV, topicV, circleV) {
+	function amandaLoaded(am, helper, profileV, profileEncryptedV, postV, messageV, topicV, circleV) {
 		amanda = am;
 		h = helper;
 
 		validator.register("profile", profileV);
+		validator.register("profileEncrypted", profileEncryptedV);
+		validator.register("post", postV);
 		validator.register("message", messageV);
 		validator.register("topic", topicV);
 		validator.register("circle", circleV);
