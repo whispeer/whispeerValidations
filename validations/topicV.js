@@ -4,16 +4,15 @@
 	topic: {
 		createTime: (int)
 		key: key,
-		cryptKeys: [key],
-		receiver: (int),
+		receiver: [{identifier, key}],
 		creator: (int),
 		newest (int),
 		unread: (bool)
 	}
 */
 
-
 var topicJSON = {
+	"name": "Topic",
 	"type": "object",
 	"properties": {
 		"createTime": {
@@ -23,26 +22,23 @@ var topicJSON = {
 		},
 		"key": {
 			"required": true,
-			"type": "string",
-			"realid": true
-		},
-		"topicHash": {
-			"required": true,
-			"type": "string",
-			"hex": true
-		},
-		"cryptKeys": {
-			"type": "Array",
-			"items": {
-				"type": "object"
-			}
+			"type": "object"
 		},
 		"receiver": {
 			"required": true,
-			"type": "Array",
+			"type": "array",
 			"items": {
-				"type": "number",
-				"min": 1
+				"type": "object",
+				"properties": {
+					"identifier": {
+						"required": true,
+						"type": "integer",
+						"min": 1
+					},
+					"key": {
+						"type": "object"
+					}
+				}
 			}
 		},
 		"creator": {

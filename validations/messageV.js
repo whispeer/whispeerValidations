@@ -27,21 +27,40 @@ var messageJSON = {
 		"meta": {
 			"type": "object",
 			"properties": {
-				"previousOwn": {
+				"createTime": {
 					"required": true,
-					"type": "number",
-					"min": 1
+					"type": "integer",
+					"min": 1388718525297
 				},
-				"previousOther": {
+				"topicHash": {
 					"required": true,
-					"type": "number",
-					"min": 1
+					"type": "string"
+				},
+				"previousMessage": {
+					"required": true,
+					"type": "integer",
+					"min": 0
+				},
+				"previousMessageHash": {
+					"required": true,
+					"type": "string",
+					"hex": true
+				},
+				"ownHash": {
+					"required": true,
+					"type": "string"
 				},
 				"signature": {
 					"required": true,
 					"type": "string",
 					"hex": true
 				},
+				"encrSignature": {
+					"required": true,
+					"type": "string",
+					"hex": true
+				},
+
 				"sender": {
 					"type": "number",
 					"min": 1
@@ -60,8 +79,7 @@ var messageJSON = {
 			"properties": {
 				"key": {
 					"required": true,
-					"type": "string",
-					"key": true
+					"type": "object"
 				},
 				"iv": {
 					"required": true,
@@ -71,12 +89,7 @@ var messageJSON = {
 				"text": {
 					"required": true,
 					"type": "string"
-				},
-				"signature": {
-					"required": true,
-					"type": "string",
-					"hex": true
-				},
+				}
 			}
 		}
 	}

@@ -74,12 +74,17 @@
 		},
 		validate: function (name, data) {
 			if (validations[name]) {
-				doValidate(validations[name], data);
+				var result = doValidate(validations[name], data);
+				if (result) {
+					console.log("validation failed");
+					console.log(result);
+				}
+				return result;
 			} else {
 				throw "unregistered validation: " + name;
 			}
 		},
-		validateEncrypted: function (name, data) {
+		validateEncrypted: function (name, data, depth) {
 			if (!encrValidations[name]) {
 				if (validations[name]) {
 					encrValidations[name] = makeEncryptedValidator(validations[name]);
