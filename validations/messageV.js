@@ -43,8 +43,7 @@ var messageJSON = {
 				},
 				"previousMessageHash": {
 					"required": true,
-					"type": "string",
-					"hex": true
+					"type": "string"
 				},
 				"ownHash": {
 					"required": true,

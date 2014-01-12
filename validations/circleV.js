@@ -8,19 +8,19 @@
 	}
 */
 
-
 var circleJSON = {
 	"type": "object",
 	"properties": {
 		"key": {
 			"required": true
 		},
-		"iv": {
-			"required": true,
-			"type": "string",
-			"hex": true
+		"user": {
+			"type": "array",
+			"items": {
+				"type": "integer"
+			}
 		},
-		"content": {
+		"name": {
 			"required": true,
 			"type": "string"
 		}
