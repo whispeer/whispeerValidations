@@ -61,11 +61,11 @@ var messageJSON = {
 				},
 
 				"sender": {
-					"type": "number",
+					"type": "integer",
 					"min": 1
 				},
 				"topicid": {
-					"type": "number",
+					"type": "integer",
 					"min": 1
 				},
 				"read": {
