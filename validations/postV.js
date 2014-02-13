@@ -26,6 +26,10 @@ var profileJSON = {
 					"type": "string",
 					"hex": true
 				},
+				"sender": {
+					"required": true,
+					"type": "integer"
+				},
 				"time": {
 					"required": true,
 					"type": "integer",
@@ -46,9 +50,18 @@ var profileJSON = {
 			}
 		},
 		"content": {
+			"type": "object",
 			"required": true,
-			"type": "string",
-			"hex": true
+			"properties": {
+				"ct": {
+					"type": "string",
+					"hex": true
+				},
+				"iv": {
+					"type": "string",
+					"hex": true
+				}
+			}
 		}
 	}
 };
