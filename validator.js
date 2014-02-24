@@ -82,7 +82,14 @@
 	}
 
 	function doLoad(cb, exported, load) {
-		if (typeof module !== "undefined" && module.exports && typeof require !== "undefined") {
+		if (typeof define !== "undefined") {
+			console.log(JSON.stringify(load));
+			define(load, function() {
+				cb.apply(null, arguments);
+
+				return exported;
+			});
+		} else if (typeof module !== "undefined" && module.exports && typeof require !== "undefined") {
 			var modules = [], i;
 			for (i = 0; i < load.length; i += 1) {
 				modules.push(require(load[i]));
@@ -91,13 +98,6 @@
 			cb.apply(null, modules);
 
 			module.exports = exported;
-		} else if (typeof define !== "undefined") {
-			console.log(JSON.stringify(load));
-			define(load, function() {
-				cb.apply(null, arguments);
-
-				return exported;
-			});
 		}
 	}
 
