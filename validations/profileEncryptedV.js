@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	var profileJSON = {
+	var profileEncryptedJSON = {
 		"type": "object",
 		"properties": {
 			"basic": {
@@ -151,10 +151,10 @@
 	};
 
 	if (typeof module !== "undefined" && module.exports) {
-		module.exports = profileJSON;
+		module.exports = profileEncryptedJSON;
 	} else if (typeof define !== "undefined") {
 		define(function() {
-			return profileJSON;
+			return profileEncryptedJSON;
 		});
 	}
 })();

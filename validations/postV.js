@@ -14,7 +14,7 @@
 		}
 	*/
 
-	var profileJSON = {
+	var postJSON = {
 		"name": "Post",
 		"type": "object",
 		"properties": {
@@ -68,10 +68,10 @@
 	};
 
 	if (typeof module !== "undefined" && module.exports) {
-		module.exports = profileJSON;
+		module.exports = postJSON;
 	} else if (typeof define !== "undefined") {
 		define(function() {
-			return profileJSON;
+			return postJSON;
 		});
 	}
 })();
