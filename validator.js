@@ -13,7 +13,7 @@
 
 			return theError;
 		} else {
-			throw "unregistered validation";
+			throw new Error("unregistered validation");
 		}
 	}
 
@@ -23,7 +23,7 @@
 		},
 		register: function (name, obj) {
 			if (validations[name]) {
-				throw "double registered validations: " + name;
+				throw new Error("double registered validations: " + name);
 			}
 
 			validations[name] = obj;
@@ -36,7 +36,7 @@
 				}
 				return result;
 			} else {
-				throw "unregistered validation: " + name;
+				throw new Error("unregistered validation: " + name);
 			}
 		}
 	};
