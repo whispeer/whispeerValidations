@@ -41,7 +41,7 @@
 		}
 	};
 
-	function amandaLoaded(am, helper, profileV, profileEncryptedV, postV, messageV, topicV, circleV) {
+	function amandaLoaded(am, helper, profileV, profileEncryptedV, postV, messageV, topicV, topicCreateV, circleV) {
 		amanda = am;
 		h = helper;
 
@@ -50,6 +50,7 @@
 		validator.register("post", postV);
 		validator.register("message", messageV);
 		validator.register("topic", topicV);
+		validator.register("topicCreate", topicCreateV);
 		validator.register("circle", circleV);
 
 		/**
@@ -108,6 +109,7 @@
 			"./validations/postV",
 			"./validations/messageV",
 			"./validations/topicV",
+			"./validations/topicCreateV",
 			"./validations/circleV"
 		]);
 })();
