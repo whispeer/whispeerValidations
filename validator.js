@@ -32,8 +32,7 @@
 			if (validations[name]) {
 				var result = doValidate(validations[name], data);
 				if (result) {
-					console.log("validation failed");
-					console.log(result);
+					console.error(result);
 				}
 				return result;
 			} else {
@@ -83,7 +82,6 @@
 
 	function doLoad(cb, exported, load) {
 		if (typeof define !== "undefined") {
-			console.log(JSON.stringify(load));
 			define(load, function() {
 				cb.apply(null, arguments);
 
