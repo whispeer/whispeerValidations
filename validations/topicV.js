@@ -29,30 +29,18 @@
 				"required": true,
 				"type": "array",
 				"items": {
-					"type": "object",
-					"properties": {
-						"identifier": {
-							"required": true,
-							"type": "integer",
-							"min": 1
-						},
-						"key": {
-							"type": "object"
-						}
-					}
+					"type": "int"
 				}
 			},
 			"creator": {
 				"type": "number",
 				"min": 1
 			},
-			"newest": {
-				"type": "number",
-				"min": 1
-			},
 			"unread": {
-				"type": "boolean",
-				"min": 1
+				"type": "array",
+				"items": {
+					"type": "int"
+				}
 			}
 		}
 	};
