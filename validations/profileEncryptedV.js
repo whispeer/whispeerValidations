@@ -116,21 +116,6 @@
 				}
 			},
 
-			"scope": {
-				"required": true,
-				"type": "object",
-				"properties": {
-					"iv": {
-						"type": "string",
-						"hex": true
-					},
-					"ct": {
-						"type": "string",
-						"hex": true
-					}
-				}
-			},
-
 			"jobs": {
 				"type": "object",
 				"properties": {
