@@ -7,14 +7,10 @@
 				"type": "object",
 				"properties": {
 					"firstname": {
-						"type": "string",
-						"minLength": 2,
-						"maxLength": 64
+						"type": "string"
 					},
 					"lastname": {
-						"type": "string",
-						"minLength": 2,
-						"maxLength": 64
+						"type": "string"
 					}
 				}
 			},
