@@ -20,6 +20,21 @@
 				"pattern": /^data:image\/\w+;base64,[A-Za-z0-9+\/=]*$/
 			},
 
+			"imageBlob": {
+				"type": "object",
+				"additionalProperties": false,
+				"properties": {
+					"imageHash": {
+						"type": "string",
+						"pattern": /^[A-Fa-f0-9]*$/
+					},
+					"blobid": {
+						"type": "string",
+						"pattern": /^[A-z0-9]*$/
+					}
+				}
+			},
+
 			"location": {
 				"type": "object",
 				"properties": {
