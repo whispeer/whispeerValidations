@@ -47,16 +47,14 @@
 						"type": "string"
 					},
 					"ownHash": {
-						"required": true,
 						"type": "string"
 					},
-					"signature": {
+					"_signature": {
 						"required": true,
 						"type": "string",
 						"hex": true
 					},
 					"encrSignature": {
-						"required": true,
 						"type": "string",
 						"hex": true
 					},
@@ -78,16 +76,17 @@
 				"type": "object",
 				"properties": {
 					"key": {
-						"required": true,
-						"type": "object"
+						"required": true
 					},
 					"iv": {
 						"required": true,
 						"type": "string",
 						"hex": true
 					},
+					"ct": {
+						"type": "string"
+					},
 					"text": {
-						"required": true,
 						"type": "string"
 					}
 				}
