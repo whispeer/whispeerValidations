@@ -23,7 +23,7 @@
 			},
 			"key": {
 				"required": true,
-				"type": "object"
+				"type": "string"
 			},
 			"receiver": {
 				"required": true,

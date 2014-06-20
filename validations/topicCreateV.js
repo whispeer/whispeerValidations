@@ -23,23 +23,14 @@
 			},
 			"key": {
 				"required": true,
-				"type": "object"
+				"type": "string"
 			},
 			"receiver": {
 				"required": true,
 				"type": "array",
 				"items": {
-					"type": "object",
-					"properties": {
-						"identifier": {
-							"required": true,
-							"type": "integer",
-							"min": 1
-						},
-						"key": {
-							"type": "object"
-						}
-					}
+					"type": "integer",
+					"min": 1
 				}
 			},
 			"creator": {

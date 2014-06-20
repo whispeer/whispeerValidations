@@ -75,9 +75,6 @@
 			"content": {
 				"type": "object",
 				"properties": {
-					"key": {
-						"required": true
-					},
 					"iv": {
 						"required": true,
 						"type": "string",
