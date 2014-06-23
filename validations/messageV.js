@@ -46,7 +46,8 @@
 						"required": true,
 						"type": "string"
 					},
-					"ownHash": {
+					"_ownHash": {
+						"required": true,
 						"type": "string"
 					},
 					"_signature": {
