@@ -21,12 +21,8 @@
 			"meta": {
 				"required": true,
 				"type": "object",
+				"extends": "securedDataContent",
 				"properties": {
-					"contentHash": {
-						"required": true,
-						"type": "string",
-						"hex": true
-					},
 					"sender": {
 						"required": true,
 						"type": "integer"
@@ -35,11 +31,6 @@
 						"required": true,
 						"type": "integer",
 						"min": 1388714536420
-					},
-					"signature": {
-						"required": true,
-						"type": "string",
-						"hex": true,
 					},
 					"key": {
 						"type": "object"
@@ -53,16 +44,8 @@
 			"content": {
 				"type": "object",
 				"required": true,
-				"properties": {
-					"ct": {
-						"type": "string",
-						"hex": true
-					},
-					"iv": {
-						"type": "string",
-						"hex": true
-					}
-				}
+				"extends": "encryptedData",
+				"properties": {}
 			}
 		}
 	};
