@@ -21,7 +21,7 @@
 				"type": "number",
 				"min": 1376244464102
 			},
-			"key": {
+			"_key": {
 				"required": true,
 				"type": "string"
 			},

@@ -15,13 +15,15 @@
 	var topicJSON = {
 		"name": "Topic",
 		"type": "object",
+		"extends": "securedData",
+//		"additionalProperties": false,
 		"properties": {
 			"createTime": {
 				"required": true,
 				"type": "number",
 				"min": 1376244464102
 			},
-			"key": {
+			"_key": {
 				"required": true,
 				"type": "string"
 			},
@@ -34,10 +36,7 @@
 				}
 			},
 			"creator": {
-				"type": "number",
-				"min": 1
-			},
-			"newest": {
+				"required": true,
 				"type": "number",
 				"min": 1
 			}

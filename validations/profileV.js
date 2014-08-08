@@ -17,7 +17,7 @@
 
 			"image": {
 				"type": "string",
-				"pattern": /^data:image\/\w+;base64,[A-Za-z0-9+\/=]*$/
+				"pattern": /^(|data:image\/\w+;base64,[A-Za-z0-9+\/=]*)$/
 			},
 
 			"imageBlob": {
