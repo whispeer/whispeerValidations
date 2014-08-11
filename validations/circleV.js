@@ -12,18 +12,27 @@
 	var circleJSON = {
 		"type": "object",
 		"properties": {
-			"key": {
-				"required": true
-			},
-			"user": {
-				"type": "array",
-				"items": {
-					"type": "integer"
+			"meta": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"users": {
+						"type": "array",
+						"items": {
+							"type": "integer"
+						}
+					},
+					"circleKey": {
+						"required": true,
+						"type": "string"
+					}
 				}
 			},
-			"name": {
+			"content": {
+				"type": "object",
 				"required": true,
-				"type": "string"
+				"extends": "encryptedData",
+				"properties": {}
 			}
 		}
 	};
