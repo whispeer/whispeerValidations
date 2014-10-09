@@ -33,18 +33,12 @@
 						"type": "integer",
 						"min": 1388718525297
 					},
-					"topicHash": {
+					"_parent": {
 						"required": true,
 						"type": "string"
 					},
-					"previousMessage": {
-						"required": true,
-						"type": "integer",
-						"min": 0
-					},
-					"previousMessageHash": {
-						"required": true,
-						"type": "string"
+					"_sortCounter": {
+						"type": "integer"
 					},
 					"_ownHash": {
 						"required": true,
