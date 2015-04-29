@@ -81,14 +81,36 @@
 		jsonSchemaValidator.addAttribute("hex", hexAttribute);
 	}
 
-	function doLoad(cb, exported, load) {
+	function doLoad(cb, exported) {
 		if (typeof define !== "undefined") {
-			define(load, function() {
+			define([
+				"amanda",
+				"whispeerHelper",
+				"./validations/profileV",
+				"./validations/profileEncryptedV",
+				"./validations/postV",
+				"./validations/messageV",
+				"./validations/topicV",
+				"./validations/topicCreateV",
+				"./validations/circleV"
+			], function() {
 				cb.apply(null, arguments);
 
 				return exported;
 			});
 		} else if (typeof module !== "undefined" && module.exports && typeof require !== "undefined") {
+			var load = [
+				"amanda",
+				"whispeerHelper",
+				"./validations/profileV",
+				"./validations/profileEncryptedV",
+				"./validations/postV",
+				"./validations/messageV",
+				"./validations/topicV",
+				"./validations/topicCreateV",
+				"./validations/circleV"
+			];
+
 			var modules = [], i;
 			for (i = 0; i < load.length; i += 1) {
 				modules.push(require(load[i]));
@@ -100,16 +122,5 @@
 		}
 	}
 
-	doLoad(amandaLoaded, validator,
-		[
-			"amanda",
-			"whispeerHelper",
-			"./validations/profileV",
-			"./validations/profileEncryptedV",
-			"./validations/postV",
-			"./validations/messageV",
-			"./validations/topicV",
-			"./validations/topicCreateV",
-			"./validations/circleV"
-		]);
+	doLoad(amandaLoaded, validator);
 })();
