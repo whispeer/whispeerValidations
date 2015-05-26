@@ -29,6 +29,8 @@
 			validations[name] = obj;
 		},
 		validate: function (name, data) {
+			return false;
+
 			if (validations[name]) {
 				var result = doValidate(validations[name], data);
 				if (result) {
