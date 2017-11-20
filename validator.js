@@ -81,35 +81,19 @@
 		jsonSchemaValidator.addAttribute("hex", hexAttribute);
 	}
 
-	function doLoad(cb, exported, load) {
-		if (typeof define !== "undefined") {
-			define(load, function() {
-				cb.apply(null, arguments);
+	const modules = []
 
-				return exported;
-			});
-		} else if (typeof module !== "undefined" && module.exports && typeof require !== "undefined") {
-			var modules = [], i;
-			for (i = 0; i < load.length; i += 1) {
-				modules.push(require(load[i]));
-			}
+	modules.push(require("amanda"))
+	modules.push(require("whispeerHelper"))
+	modules.push(require("./validations/profileV"))
+	modules.push(require("./validations/profileEncryptedV"))
+	modules.push(require("./validations/postV"))
+	modules.push(require("./validations/messageV"))
+	modules.push(require("./validations/topicV"))
+	modules.push(require("./validations/topicCreateV"))
+	modules.push(require("./validations/circleV"))
 
-			cb.apply(null, modules);
+	amandaLoaded.apply(null, modules)
 
-			module.exports = exported;
-		}
-	}
-
-	doLoad(amandaLoaded, validator,
-		[
-			"amanda",
-			"whispeerHelper",
-			"./validations/profileV",
-			"./validations/profileEncryptedV",
-			"./validations/postV",
-			"./validations/messageV",
-			"./validations/topicV",
-			"./validations/topicCreateV",
-			"./validations/circleV"
-		]);
+	module.exports = validator;
 })();
