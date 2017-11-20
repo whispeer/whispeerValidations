@@ -1,15 +1,15 @@
 (function () {
 	"use strict";
-	var amanda, h, jsonSchemaValidator;
+	var h;
 
 	var validations = {};
 
 	function doValidate(ref, data) {
 		if (ref) {
 			var theError;
-			amanda.validate(data, ref, function (err) {
+			/*amanda.validate(data, ref, function (err) {
 				theError = err;
-			});
+			});*/
 
 			return theError;
 		} else {
@@ -19,7 +19,7 @@
 
 	var validator = {
 		addAttribute: function (name, cb) {
-			jsonSchemaValidator.addAttribute(name, cb);
+			// jsonSchemaValidator.addAttribute(name, cb);
 		},
 		register: function (name, obj) {
 			if (validations[name]) {
@@ -42,7 +42,6 @@
 	};
 
 	function amandaLoaded(am, helper, profileV, profileEncryptedV, postV, messageV, topicV, topicCreateV, circleV) {
-		amanda = am;
 		h = helper;
 
 		validator.register("profile", profileV);
@@ -75,10 +74,6 @@
 			return callback();
 
 		};
-
-		// Add a new validator
-		jsonSchemaValidator = amanda("json");
-		jsonSchemaValidator.addAttribute("hex", hexAttribute);
 	}
 
 	const modules = []
